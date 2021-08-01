@@ -1,0 +1,53 @@
+  
+.container-card{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-radius: 10px 10px 0px 0px;
+    background-color: #adad85;
+    margin-left: 20px;
+}
+.container-card img{
+    width: 300px;
+    height: 200px;
+    margin: 5px;
+    border-radius: 10px;
+}
+
+.container-judul{
+    margin-left: 20px;
+    margin-bottom:20px ;
+    height: 50px;
+    opacity: 0.6px;
+    border-radius: 0px 0px 10px 10px;
+    box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.1) ;
+    background-color:#adad85 ;
+}
+@media screen and (max-width:480px){
+    .container-card{
+        width: 100%;
+        display: grid;
+        grid-template-columns: none;
+        border-radius: 10px 10px 0px 0px;
+        background-color: #adad85;
+        margin-left: 20px;
+    }
+    .container-judul{
+        width: 100%;
+        margin-left: 20px;
+        margin-bottom:20px ;
+        height: 50px;
+        opacity: 0.6px;
+        border-radius: 0px 0px 10px 10px;
+        box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.1) ;
+        background-color:#adad85 ;
+        font-size: x-small;
+    }
+    .container-card img{
+        width: 300px;
+        height: 200px;
+        margin: 5px;
+        border-radius: 10px;
+        margin-top: 20px;
+    }
+    
+}
