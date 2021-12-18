@@ -109,6 +109,9 @@ const Read = ({match,auth}) => {
                     </div>
                     </div>
                 </div>
+                <div className="">
+                    <p className="font-bold">Views : {content.readCount}</p>
+                </div>
                 <div className="h-36"/>
                 <p
                 className="font-bold"

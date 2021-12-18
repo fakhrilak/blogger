@@ -1,8 +1,11 @@
-import A from "socket.io-client"
+import SocketIOClient from "socket.io-client"
 import axios from 'axios';
-let url = "http://5085f3f5feff.ngrok.io"
-export const musicUrl = "http://50e3dd71caa0.ngrok.io"
-export const API = axios.create({baseURL: url+`/blogger`});
+const socketURL = "https://blogger-server.zilog.club"
+let url = "https://blogger-server.zilog.club"
+export const musicUrl = "https://blogger-server.zilog.club/blogger/api/v2.1/music/"
+// export const musicUrl = "http://192.168.10.120:7000"
+export const API = axios.create({baseURL: url+`/blogger/api/v2.1/`});
+export const Socket = SocketIOClient(socketURL)
 // Alter defaults after instance has been created
 export const setAuthToken = (token) => {
 	if (token) {
@@ -11,7 +14,7 @@ export const setAuthToken = (token) => {
 		delete API.defaults.headers.common['Authorization'];
 	}
 };
-export const path = url+"/blogger/single/"
+export const path = url+"/blogger/api/v2.1/single/"
 export const config = {
 	headers: {
 		'Content-Type': 'application/json'

@@ -30,7 +30,7 @@ const Register = ({loadUser,auth:{user}}) => {
             }
         })
         .catch((err)=>{
-            alert(err.message)
+            alert(err.response.data.message)
         })
     }
     return !user ?(

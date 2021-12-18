@@ -26,12 +26,12 @@ const Wrapper = (props) => {
         })
     },[])
     const history = useHistory()
-    const isPortrait = useMediaQuery({ query: '(orientation: portrait)' })
+    const isPortrait = useMediaQuery({ query: '(max-width: 800px)' })
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
     const dispatch =  useDispatch()
     return (
         <div
-         className="bg-gray-400"
+         className="bg-gray-400 pb-10"
          style={!isPortrait ?{display:"grid",gridTemplateColumns:"1fr 4fr",width:"100%"}:null}  
         >
             {isPortrait &&

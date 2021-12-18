@@ -28,10 +28,6 @@ export const Data = [
                 route: "/profile"
             },
             {
-                name:"Norifikasi",
-                route:"/notifikasi"
-            },
-            {
                  name:"Music",
                  route:"/music"
             }

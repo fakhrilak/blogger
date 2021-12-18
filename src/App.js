@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route,
   Link
 } from "react-router-dom";
+import ReactJkMusicPlayer from 'react-jinke-music-player';
+import 'react-jinke-music-player/lib/styles/index.less'
 import Home from './pages/Home.js/Home';
 import Login from './pages/Login/Login';
 import Register from './pages/Register.js/Register';
 import { Provider } from "react-redux";
 import store from "./redux/store/store"
-import { API, config, setAuthToken } from "./config/API";
+import { API, config, setAuthToken ,musicUrl} from "./config/API";
 import UserRoute from './components/Route/User';
 import Profile from './pages/Profile/Profile';
 import { loadUser } from './redux/actions/auth';
@@ -24,23 +26,99 @@ if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 const App = () => {
+  const [music_fav,setMusic_fav] = useState([])
+  const [playlist,setPlaylist] = useState([])
+  const [currentPlay,setCurrentplay] = useState(null)
+  const [mode,setMode] = useState("mini")
+  const [playTime,setPlayTime] = useState(null)
+  const [id,setId] = useState(null)
+  const [playIndex,setPlayIndex] = useState(null)
+  const [audioInTance,setAudioIntance] = useState(null)
   useEffect(()=>{
       store.dispatch(loadUser())
   },[])
+    useEffect(()=>{
+      if(id){
+        API.get("/playlist/"+id,config)
+        .then((res)=>{
+            setMusic_fav(res.data.data.Music)
+        })
+        .catch((err)=>{
+            alert(err.message)
+        })
+    }
+  },[id])
+  useEffect(()=>{
+    if(localStorage.token){
+      setPlaylist(music_fav.map((music)=>({
+        name:music.title,
+        singer: music.author,
+        musicSrc: `${musicUrl}`+music.title+".mp3",
+        cover: music.thumnail,
+        // musicSrc: "http://c1a51b39bdd6.ngrok.io/api/v1/blogger/music?name="+music.name,
+      })))
+    }
+  },[music_fav,id])
   return (
     <Provider store={store}>
       <Router>
           <Switch>
-              <Route exact path="/" component={Home}/>
+              <Route exact path="/">
+                <Home 
+                currentPlay={currentPlay} 
+                mode={mode}
+                playTime={playTime}
+                />
+              </Route>
               <Route exact path="/register" component={Register}/>
               <Route exact path="/login" component={Login}/>
               <UserRoute exact path="/profile" component={Profile} to={"/login"}/>
               <UserRoute exact path="/write/:id" component={Write} to={"/login"}/>
-              <UserRoute exact path="/music" component={Music} to={"/login"}/>
+              <UserRoute exact path="/music" to={"/login"}>
+                <Music setId={setId} audioInTance={audioInTance}/>
+              </UserRoute>
               <AdminRoute exact path="/form" component={Form}/>
               <Route exact path="/sub-category/:id" component={SubCategory}/>
               <Route exact path="/content/:id" component={Read}/>
           </Switch>
+          <div>
+            {playlist.length>0 && localStorage.token&& playlist && 
+                  <div className="w-11/12">
+                      <ReactJkMusicPlayer
+                      mode= "full"
+                      showPlayMode={true}
+                      showProgressLoadBar={false}
+                      showMiniModeCover={false}
+                      showMediaSession={true}
+                      audioLists={playlist}
+                      toggleMode={true}
+                      // playIndex={playIndex}
+                      defaultPlayIndex={0}
+                      autoPlay={false}
+                      showDownload={true}
+                      showThemeSwitch={false}
+                      responsive={false}
+                      showReload={false}
+                      showPlay={true}
+                      onAudioProgress={(audioInfo)=>{
+                        setPlayTime(audioInfo)
+                        // console.log(audioInfo)
+                      }}
+                      onModeChange={(mode)=>{
+                        setMode(mode)
+                      }}
+                      showMiniProcessBar={false}
+                      glassBg={false}
+                      showLyric={false}
+                      onAudioPlay={(currentPlayId,audioLists,audioInfo)=>{
+                        setCurrentplay(currentPlayId)
+                      }}
+                      getAudioInstance={(instance) => {
+                        setAudioIntance(instance)
+                      }}
+                      />    
+                  </div>}
+          </div>
       </Router>
     </Provider>
   )
