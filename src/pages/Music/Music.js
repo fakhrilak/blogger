@@ -238,7 +238,7 @@ const Music = (props) => {
                         <div className="w-full rounded border-2 border-black text-center bg-gray-400 
                         h-auto text-underline"
                         key={index}
-                        onClick={()=>props.audioInTance.updatePlayIndex(index)}
+                        // onClick={()=>props.audioInTance.updatePlayIndex(index)}
                         >
                             <div className="w-full h-32 lg:h-44"
                             >

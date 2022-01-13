@@ -210,16 +210,16 @@ const Form = () => {
                                     className="ml-2 mr-2"
                                     />
                                     <div className='mt-2'>
-                                        <p className='ml-2'>Capasity : <strong className='mr-2'>{parseFloat(progress.progress.length/1000000).toFixed(2)}</strong>Mb</p>
+                                        <p className='ml-2 text-xs lg:text-base'>Capasity : <strong className='mr-2'>{parseFloat(progress.progress.length/1000000).toFixed(2)}</strong>Mb</p>
                                     </div>
                                     <div className='mt-2'>
-                                        <p className='ml-2'>Transferred : <strong className='mr-2'>{parseFloat(progress.progress.transferred/1000000).toFixed(2)}</strong>Mb</p>
+                                        <p className='ml-2 text-xs lg:text-base'>Transferred : <strong className='mr-2'>{parseFloat(progress.progress.transferred/1000000).toFixed(2)}</strong>Mb</p>
                                     </div>
                                     <div className='mt-2'>
-                                        <p className='ml-2'>Remaining : <strong className='mr-2'>{parseFloat(progress.progress.remaining/1000000).toFixed(2)}</strong>Mb</p>
+                                        <p className='ml-2 text-xs lg:text-base'>Remaining : <strong className='mr-2'>{parseFloat(progress.progress.remaining/1000000).toFixed(2)}</strong>Mb</p>
                                     </div>
                                     <div className='mt-2'>
-                                        <p className='ml-2'>Speed : <strong className='mr-2'>{parseFloat(progress.progress.speed/1000000).toFixed(2)}</strong>Mb</p>
+                                        <p className='ml-2 text-xs lg:text-base'>Speed : <strong className='mr-2'>{parseFloat(progress.progress.speed/1000000).toFixed(2)}</strong>Mb</p>
                                     </div>
                                     
                                 </div>}

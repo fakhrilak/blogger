@@ -83,7 +83,7 @@ const App = () => {
           </Switch>
           <div>
             {playlist.length>0 && localStorage.token&& playlist && 
-                  <div className="w-11/12">
+                  <div className="w-11/12 fixed">
                       <ReactJkMusicPlayer
                       mode= "full"
                       showPlayMode={true}
@@ -95,7 +95,7 @@ const App = () => {
                       // playIndex={playIndex}
                       defaultPlayIndex={0}
                       autoPlay={false}
-                      showDownload={true}
+                      showDownload={false}
                       showThemeSwitch={false}
                       responsive={false}
                       showReload={false}
@@ -113,9 +113,10 @@ const App = () => {
                       onAudioPlay={(currentPlayId,audioLists,audioInfo)=>{
                         setCurrentplay(currentPlayId)
                       }}
-                      getAudioInstance={(instance) => {
-                        setAudioIntance(instance)
-                      }}
+                      mobileMediaQuery='(max-width: 500px) and (orientation : portrait)'
+                      // getAudioInstance={(instance) => {
+                      //   setAudioIntance(instance)
+                      // }}
                       />    
                   </div>}
           </div>
