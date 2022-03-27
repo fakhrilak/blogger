@@ -1,10 +1,10 @@
 import SocketIOClient from "socket.io-client"
 import axios from 'axios';
 // let url = "http://be-blogger-v1.localhost/"
-let url = "http://192.168.10.170:5001"
-const socketURL = "http://192.168.10.170:5001/"
-export const musicUrl = "http://192.168.10.170:5001/blogger/api/v2.1/music/"
-
+let url = "https://v2-blogger-server.zilog.club"
+const socketURL = "https://v2-blogger-server.zilog.club/"
+export const musicUrl = "https://v2-blogger-server.zilog.club/blogger/api/v2.1/music/"
+export const hostshare= "https://blogger.zilog.tech#/share/"
 export const API = axios.create({baseURL: url+`/blogger/api/v2.1/`});
 export const Socket = SocketIOClient(socketURL)
 // Alter defaults after instance has been created

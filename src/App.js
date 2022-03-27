@@ -22,6 +22,9 @@ import AdminRoute from './components/Route/Admin';
 import SubCategory from './pages/SubCategory/SubCategory';
 import Read from './pages/Read/Read';
 import Music from './pages/Music/Music';
+import ShareMusic from './pages/ShareMusic/ShareMusic';
+import { Redirect } from 'react-router-dom';
+import Notfound from './pages/Notfound/Notfound';
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
@@ -80,6 +83,8 @@ const App = () => {
               <AdminRoute exact path="/form" component={Form}/>
               <Route exact path="/sub-category/:id" component={SubCategory}/>
               <Route exact path="/content/:id" component={Read}/>
+              <Route exact path="/share/:name" component={ShareMusic}/>
+              <Route exact path='*' component={Notfound}/>
           </Switch>
           <div>
             {playlist.length>0 && localStorage.token&& playlist && 
@@ -102,7 +107,6 @@ const App = () => {
                       showPlay={true}
                       onAudioProgress={(audioInfo)=>{
                         setPlayTime(audioInfo)
-                        // console.log(audioInfo)
                       }}
                       onModeChange={(mode)=>{
                         setMode(mode)

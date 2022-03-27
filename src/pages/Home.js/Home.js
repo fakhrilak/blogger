@@ -1,16 +1,52 @@
 import React, { useEffect, useState } from 'react'
 import Wrapper from '../../components/Wrapper/Wrapper'
-import { API, config } from '../../config/API.js'
+import { API, config, hostshare, musicUrl } from '../../config/API.js'
 import { Line, Circle, ProgressProps } from 'rc-progress';
 import {data} from "./data"
 import img from "../../img/myfoto.jpeg"
+import COPY from "../../img/copy.png"
+import {ShareSocial} from 'react-share-social' 
+
 import "./Home.css"
+
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+import {
+    EmailShareButton,
+    FacebookShareButton,
+    HatenaShareButton,
+    InstapaperShareButton,
+    LineShareButton,
+    LinkedinShareButton,
+    LivejournalShareButton,
+    MailruShareButton,
+    OKShareButton,
+    PinterestShareButton,
+    PocketShareButton,
+    RedditShareButton,
+    TelegramShareButton,
+    TumblrShareButton,
+    TwitterShareButton,
+    ViberShareButton,
+    VKShareButton,
+    WhatsappShareButton,
+    WorkplaceShareButton,
+    FacebookShareCount
+  } from "react-share";
 const Home = (props) => {
     const {currentPlay,mode,playTime} = props
     const [random,setRandom] = useState([])
+    const [copy,setCopy] = useState()
     function getRandomArbitrary(min, max) {
         return parseInt(Math.random() * (max - min) + min) 
     }
+    const style = {
+        background: "#9CA3AF",
+        borderRadius: 3,
+        border: 0,
+        color: 'white',
+        padding: '0 30px',
+        marginTop:10
+      };
     useEffect(()=>{
         let test = []
         for(let i =0;i<4;i++){
@@ -84,6 +120,16 @@ const Home = (props) => {
                        className="w-full col-span-8 m-auto"
                        />
                        <p className='font-bold'>{fixTime(playTime.duration) }</p>
+                   </div>
+                   <div className="w-11/12 lg:w-6/12 m-auto pt-10">
+                        <div className="w-11/12 lg:w-6/12 m-auto pt-10 pb-10 m-auto">
+                            <ShareSocial
+                                style={style}
+                                url ={hostshare+playTime.name}
+                                socialTypes={['facebook','twitter','reddit','linkedin','line','hatena',"instapaper",'email']} 
+                                //  onSocialButtonClicked={ data=> console.log(data)}    
+                            />
+                        </div>
                    </div>
                    </>:<>
                         <p>Noplay</p>
