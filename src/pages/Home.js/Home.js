@@ -122,10 +122,10 @@ const Home = (props) => {
                        <p className='font-bold'>{fixTime(playTime.duration) }</p>
                    </div>
                    <div className="w-11/12 lg:w-6/12 m-auto pt-10">
-                        <div className="w-11/12 lg:w-6/12 m-auto pt-10 pb-10 m-auto">
+                        <div className="w-11/12 lg:w-6/12 pt-10 pb-10 m-auto">
                             <ShareSocial
                                 style={style}
-                                url ={hostshare+playTime.name}
+                                url ={encodeURI(hostshare+playTime.name)}
                                 socialTypes={['facebook','twitter','reddit','linkedin','line','hatena',"instapaper",'email']} 
                                 //  onSocialButtonClicked={ data=> console.log(data)}    
                             />

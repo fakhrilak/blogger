@@ -1,5 +1,5 @@
 import { config } from 'dotenv';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState ,useRef} from 'react'
 import Wrapper from '../../components/Wrapper/Wrapper';
 import { API,musicUrl } from '../../config/API';
 import "react-jinke-music-player/assets/index.css";
@@ -16,6 +16,18 @@ const Music = (props) => {
     const [idplayList,setIdPlayList] = useState(null)
     const [showForm,setShowForm] = useState(false)
     const [name,setName] = useState("")
+    const [title, setTitle] = useState("Music");
+
+    useEffect(() => {
+        // This will run when the page first loads and whenever the title changes
+        document.title = title;
+    }, [title]);
+
+    // useEffect(() => () => {
+    //     if (!prevailOnUnmount) {
+    //     document.title = defaultTitle.current;
+    //     }
+    // }, [])
     
     useEffect(()=>{
         API.get("/music?page="+query,config)

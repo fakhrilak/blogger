@@ -18,6 +18,17 @@ const ShareMusic = ({match}) => {
     const [playTime,setPlayTime] = useState(null)
     const [redirect,setRedirect] = useState(false)
     const [copy,setCopy] = useState()
+    const [title, setTitle] = useState("Share Music");
+
+    useEffect(() => {
+        // This will run when the page first loads and whenever the title changes
+        if (playlist){
+            document.title = title;
+            const favicon = document.getElementById("icon");
+            favicon.href = playlist[0].cover;
+        }
+        
+    }, [playlist]);
     const style = {
         background: "#9CA3AF",
         borderRadius: 3,
@@ -109,10 +120,10 @@ const ShareMusic = ({match}) => {
             />    
         </div>
         {playTime &&
-        <div className="w-11/12 lg:w-6/12 m-auto pt-10 pb-10 m-auto">
+        <div className="w-11/12 lg:w-6/12 m-auto pt-10 pb-10">
             <ShareSocial
                 style={style}
-                url ={hostshare+playTime.name}
+                url ={encodeURI(hostshare+playTime.name)}
                 socialTypes={['facebook','twitter','reddit','linkedin','line','hatena',"instapaper",'email']} 
                 //  onSocialButtonClicked={ data=> console.log(data)}    
             />

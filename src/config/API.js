@@ -4,7 +4,7 @@ import axios from 'axios';
 let url = "https://v2-blogger-server.zilog.club"
 const socketURL = "https://v2-blogger-server.zilog.club/"
 export const musicUrl = "https://v2-blogger-server.zilog.club/blogger/api/v2.1/music/"
-export const hostshare= "https://blogger.zilog.tech#/share/"
+export const hostshare= "https://blogger.zilog.tech/#/share/"
 export const API = axios.create({baseURL: url+`/blogger/api/v2.1/`});
 export const Socket = SocketIOClient(socketURL)
 // Alter defaults after instance has been created

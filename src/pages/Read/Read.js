@@ -21,6 +21,14 @@ const Read = ({match,auth}) => {
     const [triger,setTriger] = useState(false)
     const [Editor2,setEditor2] = useState("")
     const{isAuthenticated}=auth
+    useEffect(() => {
+        // This will run when the page first loads and whenever the title changes
+        if (content){
+            document.title = "Read";
+            const favicon = document.getElementById("icon");
+            favicon.href = path+content.tumbname;
+        }
+    }, [content]);
     useEffect(()=>{
         console.log(match.params.id)
         API.get(`/content/${match.params.id}`)
