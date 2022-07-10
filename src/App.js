@@ -25,6 +25,9 @@ import Music from './pages/Music/Music';
 import ShareMusic from './pages/ShareMusic/ShareMusic';
 import { Redirect } from 'react-router-dom';
 import Notfound from './pages/Notfound/Notfound';
+import MusicChoose from './pages/Music/MusicChoose';
+import MusicSpeaker from './pages/Music/MusicSpeaker';
+import MusicControlle from './pages/Music/MusicControlle';
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
@@ -80,6 +83,14 @@ const App = () => {
               <UserRoute exact path="/music" to={"/login"}>
                 <Music setId={setId} audioInTance={audioInTance}/>
               </UserRoute>
+              <UserRoute
+               exact path="/musicremote" to={"/login"}
+              >
+                <MusicChoose/>
+              </UserRoute>
+              <UserRoute exact path="/musicremote/speaker" component={MusicSpeaker}/>
+              <UserRoute exact path="/musicremote/speaker/:id" component={MusicSpeaker}/>
+              <UserRoute exact path="/musicremote/controller" component={MusicControlle}/>
               <AdminRoute exact path="/form" component={Form}/>
               <Route exact path="/sub-category/:id" component={SubCategory}/>
               <Route exact path="/content/:id" component={Read}/>

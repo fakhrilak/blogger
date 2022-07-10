@@ -17,6 +17,10 @@ export const Data = [
            {
                 name:"Music",
                 route:"/music"
+           },
+           {
+            name:"Music Remote",
+            route:"/musicremote"
            }
        ]
     },
