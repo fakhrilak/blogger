@@ -37,7 +37,7 @@ const Home = () => {
                <div className="w-full h-full">
                    <div className="m-auto w-10/12">
                         <div className="pt-20">
-                            <p className="w-auto text-center text-3xl font-bold animate-bounce">WELCOME TO JEMBUT BLOGGER</p>
+                            <p className="w-auto text-center text-3xl font-bold animate-bounce">WELCOME TO ZIL BLOGGER</p>
                         </div>
                         <div className="lg:flex xl:flex 2xl:flex m-auto">
                             <div className="m-auto">
