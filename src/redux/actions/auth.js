@@ -12,7 +12,7 @@ export const handleLogin=(email,password,loginacsen)=>async(dispatch)=>{
     let newconfig = {
       headers: {
         'Content-Type': 'application/json',
-        "path" : 'http://localhost/blogger/api/v2.1/login'
+        // "path" : 'http://localhost/blogger/api/v2.1/login'
       }
     }
     const res = await API.post("/login", body, config);

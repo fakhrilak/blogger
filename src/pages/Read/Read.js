@@ -30,7 +30,7 @@ const Read = ({match,auth}) => {
         }
     }, [content]);
     useEffect(()=>{
-        console.log(match.params.id)
+        console.log(match.params.id,"ini params")
         API.get(`/content/${match.params.id}`)
         .then((res)=>{
             setContent(res.data.data)

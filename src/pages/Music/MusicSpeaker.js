@@ -15,6 +15,8 @@ const MusicSpeaker = ({auth,match}) => {
     const [playTime,setPlayTime] = useState(null)
     const [playIndex,setPlayIndex] = useState()
     const [audioInstance,setAudioIntance] = useState()
+    const [triger,setTriger] = useState()
+    const [modePlay,setModePlay] = useState("order")
     useEffect(()=>{
         if(auth.user){
             Socket.emit("joinMusic",{
@@ -22,14 +24,14 @@ const MusicSpeaker = ({auth,match}) => {
                 "mode" : "speaker",
                 "socketId" : Socket.id
             })
-            Socket.on("onRes-joinMusic"+Socket.id.toString(),data=>{
+            Socket.on("onRes-joinMusic"+Socket.id,data=>{
                 alert(data.message)
                 history.push("/musicremote")
             })
         }
     },[auth])
     useEffect(()=>{
-        Socket.on("onRes-reqToSpeakerRenderPlaylist"+Socket.id.toString(),data=>{
+        Socket.on("onRes-reqToSpeakerRenderPlaylist"+Socket.id,data=>{
             // alert(data.id)
             window.location.href = "#/musicremote/speaker/"+data.id
             window.location.reload()
@@ -58,23 +60,31 @@ const MusicSpeaker = ({auth,match}) => {
         }
     },[music_fav])
     useEffect(()=>{
-        Socket.on("onRes-reqPlayIndex"+Socket.id.toString(),data=>{
+        Socket.on("onRes-reqPlayIndex"+Socket.id,data=>{
+            console.log(data,"playindex")
             setPlayIndex(data.index)
         })
     },[])
     useEffect(()=>{
         if(audioInstance){
-            Socket.on("onRes-reqPlayStatus"+Socket.id.toString(),data=>{
-                if(data==true){
+            Socket.on("onRes-reqPlayStatus"+Socket.id,data=>{
+                setTriger(!triger)
+                if(data.status==true){
                     audioInstance.play()
                 }else{
                     audioInstance.pause()
                 }
-                console.log(audioInstance)
             })
         }
         
-    },[])
+    },[triger])
+    useEffect(()=>{
+        Socket.on("onRes-reqChangePlaymode"+Socket.id,data=>{
+            console.log(data,"heeeee")
+            setTriger(!triger)
+            setModePlay(data.mode)
+        })
+    },[triger])
     const getPersen =(tot,cur)=>{
         return cur/tot * 100
     }
@@ -138,6 +148,10 @@ const MusicSpeaker = ({auth,match}) => {
                     showPlay={true}
                     getAudioInstance={(audioInstance)=>{
                         setAudioIntance(audioInstance)
+                        Socket.on("onRes-reqChangeVolume"+Socket.id,data=>{
+                            console.log(data)
+                            audioInstance.volume=data.volume
+                        })
                         Socket.on("onRes-reqPlayStatus"+Socket.id,data=>{
                             if(data==true){
                                 audioInstance.play()
@@ -146,6 +160,9 @@ const MusicSpeaker = ({auth,match}) => {
                             }
                         })
                     }}
+                    onAudioVolumeChange={(volume)=>{
+                        console.log(volume,"ini volume")
+                    }}
                     onAudioProgress={(audioInfo)=>{
                         // RenderAudio(audioInfo)
                         setPlayTime(audioInfo)
@@ -153,6 +170,8 @@ const MusicSpeaker = ({auth,match}) => {
                             setPlayIndex(playIndex+1)
                         }
                     }}
+                    // defaultPlayMode={modePlay}
+                    playMode={modePlay}
                     onModeChange={(mode)=>{
                         setMode(mode)
                     }}
