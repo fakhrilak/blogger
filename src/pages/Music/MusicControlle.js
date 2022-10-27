@@ -12,6 +12,8 @@ const MusicControlle = ({auth}) => {
     const [statusPlay,setStatusPlay] = useState(false)
     const [keyword,setKeyword] = useState("")
     const [music,setMusic] = useState()
+    const [mode,setMode] = useState(0)
+    const [volume,setVolume] = useState(0.2)
     useEffect(()=>{
         if(auth.user){
             console.log("siniiii")
@@ -50,6 +52,12 @@ const MusicControlle = ({auth}) => {
             setMusic_fav(filtered)
         }
     },[keyword])
+    const dataloop=[
+        "order",
+        // "orderLoop",
+        "shufflePlay",
+        // "singleLoop"
+    ]
   return (
     <Wrapper>
         <div className='w-10/12 m-auto'>
@@ -75,7 +83,8 @@ const MusicControlle = ({auth}) => {
                     <button>
                         <BiSkipPrevious
                         onClick={()=>{
-                            Socket.emit("reqPlayIndex",{email:auth.user.email,index:indexPlay-1})
+                            setIndexPlay(indexPlay-1)
+                            Socket.emit("reqPlayIndex",{email:auth.user.email,index:indexPlay})
                         }}
                         size={100}
                         />
@@ -103,10 +112,53 @@ const MusicControlle = ({auth}) => {
                     <button>
                         <BiSkipNext size={100}
                         onClick={()=>{
-                            Socket.emit("reqPlayIndex",{email:auth.user.email,index:indexPlay+1})
+                            setIndexPlay(indexPlay+1)
+                            Socket.emit("reqPlayIndex",{email:auth.user.email,index:indexPlay})
                         }}
                         />
                     </button>
+                </div>
+            </div>
+            <div className='mb-8'>
+                <button
+                className='w-40 h-10 bg-white rounded font-bold text-lg'
+                onClick={()=>{
+                    if(mode == 1){  
+                        Socket.emit("reqChangePlaymode",{email:auth.user.email,mode:dataloop[mode]})
+                        setMode(0)
+                    }else{
+                        Socket.emit("reqChangePlaymode",{email:auth.user.email,mode:dataloop[mode]})
+                        setMode(mode+1)
+                    }
+                
+                }}
+                >{dataloop[mode]}</button>
+            </div>
+            <div className='grid grid-cols-3 gap-1'>
+                <div>
+                    <button
+                    className='w-full h-10 bg-white rounded font-bold text-lg'
+                    onClick={()=>{
+                        if(volume>=0.1){
+                            Socket.emit("reqChangeVolume",{email:auth.user.email,volume:volume})
+                            setVolume(volume-0.1)
+                        }
+                    }}
+                    >DOWN</button>
+                </div>
+                <div>
+                    <p className='text-center font-bold text-lg'>{volume.toFixed(1)}</p>
+                </div>
+                <div className='mb-8'>
+                    <button
+                    className='w-full h-10 bg-white rounded font-bold text-lg'
+                    onClick={()=>{
+                        if(volume<=0.9){
+                            Socket.emit("reqChangeVolume",{email:auth.user.email,volume:volume})
+                            setVolume(volume+0.1)
+                        }
+                    }}
+                    >UP</button>
                 </div>
             </div>
             <div>
