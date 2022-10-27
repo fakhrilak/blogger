@@ -13,6 +13,7 @@ const SubCategory = ({match}) => {
         API.get("/sub-category/"+match.params.id,config)
         .then((res)=>{
             setContets(res.data.data.contents)
+            console.log(res.data.data.contents," =============== data")
         })
         .catch((err)=>{
             console.log(err)
@@ -62,7 +63,7 @@ const SubCategory = ({match}) => {
                                     ,whiteSpace:"nowrap"
                                     }}
                                     ><ReactQuill
-                                    value={data.content}
+                                    value={data.content ? data.content : null}
                                     readOnly={true}
                                     theme={"bubble"}
                                     /></p>
