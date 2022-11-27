@@ -32,9 +32,10 @@ const MusicSpeaker = ({auth,match}) => {
     },[auth])
     useEffect(()=>{
         Socket.on("onRes-reqToSpeakerRenderPlaylist"+Socket.id,data=>{
-            // alert(data.id)
-            window.location.href = "#/musicremote/speaker/"+data.id
-            window.location.reload()
+            alert(data.id)
+            window.location.href = "/musicremote/speaker/"+data.id
+            setTimeout(()=>window.location.reload(),1000)
+            // window.location.reload()
         })
     },[])
     useEffect(()=>{
@@ -61,7 +62,6 @@ const MusicSpeaker = ({auth,match}) => {
     },[music_fav])
     useEffect(()=>{
         Socket.on("onRes-reqPlayIndex"+Socket.id,data=>{
-            console.log(data,"playindex")
             setPlayIndex(data.index)
         })
     },[])
@@ -80,7 +80,6 @@ const MusicSpeaker = ({auth,match}) => {
     },[triger])
     useEffect(()=>{
         Socket.on("onRes-reqChangePlaymode"+Socket.id,data=>{
-            console.log(data,"heeeee")
             setTriger(!triger)
             setModePlay(data.mode)
         })
@@ -149,7 +148,6 @@ const MusicSpeaker = ({auth,match}) => {
                     getAudioInstance={(audioInstance)=>{
                         setAudioIntance(audioInstance)
                         Socket.on("onRes-reqChangeVolume"+Socket.id,data=>{
-                            console.log(data)
                             audioInstance.volume=data.volume
                         })
                         Socket.on("onRes-reqPlayStatus"+Socket.id,data=>{
@@ -161,7 +159,7 @@ const MusicSpeaker = ({auth,match}) => {
                         })
                     }}
                     onAudioVolumeChange={(volume)=>{
-                        console.log(volume,"ini volume")
+                        // console.log(volume,"ini volume")
                     }}
                     onAudioProgress={(audioInfo)=>{
                         // RenderAudio(audioInfo)

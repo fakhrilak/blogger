@@ -46,7 +46,7 @@ const Write = (props) => {
             
         })
         .catch((err)=>{
-            console.log(err)
+            alert(err.response.message)
         })
         
     }
@@ -57,7 +57,7 @@ const Write = (props) => {
             setUsers(res.data.data)
         })
         .catch((err)=>{
-            console.log(err.message)
+            alert(err.response.message)
         })
     }, [])
 
@@ -76,7 +76,7 @@ const Write = (props) => {
 
     const tambah=(data)=>{
         setParticipan([...participan,data])
-        console.log(participan)
+        // alert(err.response.message)
     }
     return user?(
         <Wrapper>
@@ -137,6 +137,14 @@ const Write = (props) => {
                                     </div>
                                 </div>)):null} 
                         </div>
+                        <div className="w-auto pt-10 pb-5">
+                    <button
+                        onClick={()=>onClick()}
+                        className="bg-white w-20 h-10 rounded text-xl"
+                        >
+                            Post
+                    </button>
+                </div>
                     </div>
                     {filtered.length > 0 && search!= ""?<div className="col-end-3 mt-5">
                         <div>
@@ -168,14 +176,6 @@ const Write = (props) => {
                             </div>
                         </div>))}
                     </div>:null}
-                </div>
-                <div className="w-auto pt-10 pb-5">
-                    <button
-                    onClick={()=>onClick()}
-                    className="bg-white w-20 h-10 rounded text-xl"
-                    >
-                        Post
-                    </button>
                 </div>
             </div>
         </Wrapper>

@@ -105,7 +105,6 @@ const ShareMusic = ({match}) => {
             showPlay={true}
             onAudioProgress={(audioInfo)=>{
             setPlayTime(audioInfo)
-            // console.log(audioInfo)
             }}
             onModeChange={(mode)=>{
             setMode(mode)
@@ -124,8 +123,7 @@ const ShareMusic = ({match}) => {
             <ShareSocial
                 style={style}
                 url ={encodeURI(hostshare+playTime.name)}
-                socialTypes={['facebook','twitter','reddit','linkedin','line','hatena',"instapaper",'email']} 
-                //  onSocialButtonClicked={ data=> console.log(data)}    
+                socialTypes={['facebook','twitter','reddit','linkedin','line','hatena',"instapaper",'email']}  
             />
         </div>
         }

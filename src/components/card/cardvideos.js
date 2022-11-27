@@ -9,7 +9,7 @@ const Cardvideos = (props) => {
       setDataVideo(res.data.data)
     })
     .catch((err)=>{
-      console.log(" ============ ERROR", err)
+      alert(err.response.message)
     })    
   },[datavideo])
   return (
@@ -33,7 +33,6 @@ const Cardvideos = (props) => {
                       <button onClick={actions.play}
                       >Play</button>
                       <button onClick={actions.pause}>Pause</button>
-                      <button onClick={()=>{console.log("hello")}}>Fullscreen</button>
                   </div>
                 )}
             </Video>

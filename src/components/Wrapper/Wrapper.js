@@ -22,7 +22,7 @@ const Wrapper = (props) => {
             setData(res.data.data)
         })
         .catch((err)=>{
-            console.log(err.response)
+            alert(err.response.message)
         })
     },[])
     const history = useHistory()

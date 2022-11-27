@@ -30,15 +30,13 @@ const Read = ({match,auth}) => {
         }
     }, [content]);
     useEffect(()=>{
-        console.log(match.params.id,"ini params")
         API.get(`/content/${match.params.id}`)
         .then((res)=>{
             setContent(res.data.data)
-            console.log(res.data.data)
             setEditor("")
         })
         .catch((err)=>{
-            alert(err.message)
+            alert(err.response.data.message)
         })
     },[triger])
     const history = useHistory()
@@ -76,7 +74,6 @@ const Read = ({match,auth}) => {
             alert(err.message)
         })
     }
-    console.log(content.User)
     return (
         <Wrapper>
             {content.User ?
@@ -118,7 +115,7 @@ const Read = ({match,auth}) => {
                     </div>
                 </div>
                 <div className="">
-                    <p className="font-bold">Views : {content.readCount}</p>
+                    <p className="font-bold">Views : {content.views ? content.views:null}</p>
                 </div>
                 <div className="h-36"/>
                 <p

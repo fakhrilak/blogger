@@ -12,7 +12,6 @@ const Register = ({loadUser,auth:{user}}) => {
     const [name,setName] = useState("")
 
     const onRegister =()=>{
-        console.log("masuk")
         const data ={
                 "email":email,
                 "username": username,

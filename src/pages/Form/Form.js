@@ -5,6 +5,7 @@ import { API, config, musicUrl } from '../../config/API'
 import {Socket} from "../../config/API"
 import { Line, Circle, ProgressProps } from 'rc-progress';
 import logo from "../../img/logo.png"
+import YouTube from "react-youtube";
 const Form = () => {
     const[category,setCategory]= useState([])
     const[nameCategory,setNameCategory] = useState("")
@@ -18,13 +19,11 @@ const Form = () => {
     const[yt,setYT] = useState([])
     useEffect(()=>{
         Socket.on("error"+Socket.id,data=>{
-            console.log(data.message)
             alert(data.message)
         })
     },[])
     useEffect(()=>{
         Socket.on("progress"+Socket.id,data=>{
-            console.log(data)
             setLoading(false)
             setProgress(data)
         })
@@ -96,12 +95,20 @@ const Form = () => {
         API.get("/yt-link?title="+cari,config)
         .then((res)=>{
             setYT(res.data.data)
-            console.log(res.data.data)
         })
         .catch((err)=>{
             alert("fail get data from yt")
         })
     }
+
+    const opts = {
+        height: "220",
+        width: "320",
+        playerVars: {
+          autoplay: 10,
+        },
+    };
+    
     return (
         <Wrapper>
             <div className="lg:flex items-center bg-white w-3/4 m-auto mt-20 rounded-lg shadow-2xl">
@@ -190,7 +197,12 @@ const Form = () => {
                                 <p
                                 className="text-xs pb-3"
                                 >{data.title}</p>
-                                <img src={data.image} className="w-7/12"/>
+                                {/* <img src={data.image} className="w-7/12"/> */}
+                                <YouTube
+                                    videoId={data.videoId}
+                                    opts={opts}
+                                    // className="w-32 lg:w-32 h-44"
+                                />
                                 <p className="text-xs pt-3">Durasi : <strong className="pr-3">{data.timestamp}</strong> Views : <strong>{data.views}</strong></p>
                                 <p className="text-xs">Author : {data.author.name}</p>
                                 <button className="bg-green-500 w-full mt-3 text-white"

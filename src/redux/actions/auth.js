@@ -33,7 +33,7 @@ export const handleLogin=(email,password,loginacsen)=>async(dispatch)=>{
 export const loadUser = () => async (dispatch) => {
   if (localStorage.token) {
     setAuthToken(localStorage.getItem('token'));
-    console.log(localStorage.getItem('token'),'masuk sini')
+
   }
   try {
     const res = await API.get("/auth",config);
@@ -42,10 +42,7 @@ export const loadUser = () => async (dispatch) => {
       payload: res.data
     });
   } catch (err) {
-    // console.log(err)
-    // dispatch({
-    //   type: types.load_user_fail,
-    // });
+    alert(err.response.message)
   }
 };
 
@@ -71,7 +68,7 @@ export const handleRegister=(
     gendre:gendre,
     addres:addres
   }
-  console.log(body)
+
   try{
     const res = await API.post("/register", body, config);
     dispatch({
