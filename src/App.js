@@ -50,7 +50,7 @@ const App = () => {
             setMusic_fav(res.data.data.Music)
         })
         .catch((err)=>{
-            alert(err.message)
+            alert(err.response.message)
         })
     }
   },[id])
@@ -59,12 +59,13 @@ const App = () => {
       setPlaylist(music_fav.map((music)=>({
         name:music.title,
         singer: music.author,
-        musicSrc: `${musicUrl}`+music.title+".mp3",
+        musicSrc: decodeURI(`${musicUrl}`+music.title+".mp3"),
         cover: music.thumnail,
         // musicSrc: "http://c1a51b39bdd6.ngrok.io/api/v1/blogger/music?name="+music.name,
       })))
     }
   },[music_fav,id])
+
   return (
     <Provider store={store}>
       <Router>

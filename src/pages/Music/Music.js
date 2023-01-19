@@ -4,6 +4,7 @@ import Wrapper from '../../components/Wrapper/Wrapper';
 import { API,musicUrl } from '../../config/API';
 import "react-jinke-music-player/assets/index.css";
 import logo from "../../img/logo.png"
+import CardMusic from '../../components/card/CardMusic';
 const Music = (props) => {
     const [music_coll,setMusic_coll] = useState([])
     const [music_fav,setMusic_fav] = useState([])
@@ -17,20 +18,17 @@ const Music = (props) => {
     const [showForm,setShowForm] = useState(false)
     const [name,setName] = useState("")
     const [title, setTitle] = useState("Music");
+    const [lasweek,setLastWeek] = useState([])
+    const [search,setSearch] = useState("")
 
     useEffect(() => {
         // This will run when the page first loads and whenever the title changes
         document.title = title;
     }, [title]);
 
-    // useEffect(() => () => {
-    //     if (!prevailOnUnmount) {
-    //     document.title = defaultTitle.current;
-    //     }
-    // }, [])
-    
+    // GET MUSIC COLL
     useEffect(()=>{
-        API.get("/music?page="+query,config)
+        API.get("/music?page="+query+"&&search="+search,config)
         .then((res)=>{
             setMusic_coll(res.data.data)
             if(res.data.next == 1){
@@ -47,7 +45,17 @@ const Music = (props) => {
         .catch((err)=>{
             alert(err.message)
         })
-    },[query])
+    },[query,triger])
+
+    useEffect(()=>{
+        API.get("/music-lastweek",config)
+        .then((res)=>{
+            setLastWeek(res.data.data)
+        })
+        .catch((err)=>{
+            alert(err.message)
+        })
+    },[])
 
     useEffect(()=>{
         API.get("/playlist",config)
@@ -140,10 +148,6 @@ const Music = (props) => {
                             className="font-bold rounded w-full h-10 bg-gray-500 text-white"
                             >Setting Playlist</button>
                         </div>
-                        {/* <input
-                        className="ml-10 rounded text-center"
-                        placeholder="Search"
-                        /> */}
                     </div>
                     {showForm && 
                     <div className="w-full m-auto grid grid-cols-2 lg:grid-cols-5 pb-5 gap-5">
@@ -205,31 +209,36 @@ const Music = (props) => {
                         ))}
                         
                     </div>}
+                    {page && lasweek.length > 0 && <p className='pb-10'> LAST DOWNLOADED</p>}
                     {page && <div className="grid grid-cols-2 lg:grid-cols-4 md:grid-cols-3 gap-5 lg:gap-10  pb-20">
-                    {music_coll.map((data,index)=>(
-                        <div className="w-full rounded border-2 border-black text-center bg-gray-400 
-                        h-auto text-underline" key={index}
-                        
-                        >
-                            <div className="w-full h-32 lg:h-44"
-                            >
-                                <div
-                                className="float-right mr-2 mt-1"
-                                >
-                                    <button
-                                    className="font-bold text-sm text-white w-5 h-5 bg-green-700 rounded-full"
-                                    onClick={()=>addFav(data._id)}
-                                    >+</button>
-                                </div>
-                                <img src={data.thumnail} className="w-full"/>
-                            </div>
-                            <div className="pt-3">
-                                <p
-                                className="m-1 lg:m-2 md:m-2 overflow-hidden overflow-ellipsis h-4 max-w-2xl sm:max-w-10 text-xs"
-                                >{data.title}</p>
-                            </div>
+                            {lasweek.map((data,index)=>(
+                                <CardMusic data={data} action={addFav} logo={"+"} key={index} colorbutton={"bg-green-700"}/>
+                            ))}
+                    </div>}
+                    {page &&<p className='pb-5'> ALL COLLECTIONS MUSIC</p>}
+                    {page && 
+                    <div className='grid grid-cols-3 lg:grid-cols-4 gap-2 mb-5'>
+                        <div className='w-full col-span-2'>
+                            <input
+                            placeholder=' SEARCH'
+                            className='w-full rounded text-center '
+                            type='input'
+                            value={search}
+                            onChange={(e)=>setSearch(e.target.value)}
+                            />
                         </div>
-                    ))}
+                        <div className='w-full'>
+                            <button 
+                            className='bg-green-700 w-3/6 rounded'
+                            onClick={()=>setTriger(!triger)}
+                            >Search</button>
+                        </div>
+                    </div>    
+                    }
+                    {page && <div className="grid grid-cols-2 lg:grid-cols-4 md:grid-cols-3 gap-5 lg:gap-10  pb-20">
+                            {music_coll.map((data,index)=>(
+                                <CardMusic data={data} action={addFav} logo={"+"} key={index} colorbutton={"bg-green-700"}/>
+                            ))}
                     </div>}
                     {page && <div className="w-12/12 grid grid-cols-2">
                         <div className="w-12/12 text-left">
@@ -246,31 +255,9 @@ const Music = (props) => {
                         </div>
                     </div>}
                     {!page && <div className="grid grid-cols-2 lg:grid-cols-4 md:grid-cols-3 gap-5 lg:gap-10  pb-20">
-                    {music_fav.map((data,index)=>(
-                        <div className="w-full rounded border-2 border-black text-center bg-gray-400 
-                        h-auto text-underline"
-                        key={index}
-                        // onClick={()=>props.audioInTance.updatePlayIndex(index)}
-                        >
-                            <div className="w-full h-32 lg:h-44"
-                            >
-                                <div
-                                className="float-right mr-2 mt-1"
-                                >
-                                    <button
-                                    className="font-bold text-sm text-white w-5 h-5 bg-red-500 rounded-full"
-                                    onClick={()=>deletFav(data._id)}
-                                    >x</button>
-                                </div>
-                                <img src={data.thumnail} className="w-full"/>
-                            </div>
-                            <div className="pt-3">
-                                <p
-                                className="m-1 lg:m-2 md:m-2 overflow-hidden overflow-ellipsis h-4 max-w-2xl sm:max-w-10 text-xs"
-                                >{data.title}</p>
-                            </div>
-                        </div>
-                    ))}
+                            {music_fav.map((data,index)=>(
+                                <CardMusic data={data} action={deletFav} logo={"x"} key={index} colorbutton={"bg-red-700"}/>
+                            ))}
                     </div>}
                 </div>
                 

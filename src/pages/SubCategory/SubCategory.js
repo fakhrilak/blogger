@@ -8,38 +8,63 @@ import { path } from '../../config/API'
 import dayjs from 'dayjs'
 import logo from "../../img/logo.png"
 const SubCategory = ({match}) => {
-    //console.log(match.params,"ini paramas")
     const [contets,setContets] =useState([])
+    const [searchInput,setSearchInput] = useState("")
+    const [filteredResult,setFilteredResult] = useState([])
     React.useEffect(() => {
         API.get("/sub-category/"+match.params.id,config)
         .then((res)=>{
             setContets(res.data.data.contents)
-            //console.log(res.data.data.contents," =============== data")
+            setFilteredResult(res.data.data.contents)
         })
         .catch((err)=>{
             //console.log(err)
         })
 
     }, [match.params.id])
+
     const history = useHistory()
+    const searchItems = (searchValue) => {
+        setSearchInput(searchValue)
+        if (searchInput !== ""){
+            const filtered = contets.filter((item) => {
+                return Object.values(item).join('').toLowerCase().includes(searchInput.toLowerCase())
+            })
+            setFilteredResult(filtered)
+        }else{
+            setFilteredResult(contets)
+        }
+    }
     return (
         <Wrapper>
-            <div className="w-11/12 m-auto">
+            <div className="w-full m-auto">
                 {match.params.id != "630247e61c0039e50e030572"?
                 <>
-                    <div className="w-full pt-10">
-                        <button
-                        onClick={()=>history.push(`/write/${match.params.id}`)}
-                        className="bg-gray-500 text-white w-44 rounded h-20"
-                        >WRITE CONTENT</button>
+                    <div className='grid grid-rows-2 h-44 bg-black gap-5'>
+                        <div className="w-11/12 pt-5 m-auto">
+                            <button
+                            onClick={()=>history.push(`/write/${match.params.id}`)}
+                            className="bg-gray-500 text-white w-44 rounded h-10"
+                            >WRITE CONTENT</button>
+                        </div>
+                        <div className='w-11/12 m-auto'>
+                            <input
+                            className='h-10 rounded w-full'
+                            type='input'
+                            placeholder='   SEARCH'
+                            value={searchInput}
+                            onChange={(e)=>searchItems(e.target.value)}
+                            />
+                        </div>
                     </div>
                     {contets.length > 0 ?
                     <div className="w-11/12 m-auto">
-                        <div className="lg:grid grid-cols-3 lg:grid-cols-2 mt-5 gap-14 ">
-                        {contets.map((data)=>(
+                        <div className="lg:grid lg:grid-cols-3 lg:grid-cols-2 mt-5 gap-14 ">
+                        {filteredResult.map((data,index)=>(
                             
                                 <div className="rounded-lg bg-gray-500 mt-4 shadow-2xl overflow-hidden" 
                                 onClick={()=>history.push(`/content/${data._id}`)}
+                                key={index}
                                 >
                                     <div className="m-5 w-full text-center overflow-hidden ">
                                         <p className="overflow-hidden text-2xl  text-black font-bold"

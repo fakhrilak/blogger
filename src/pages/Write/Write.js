@@ -40,13 +40,14 @@ const Write = (props) => {
         data.append("idUser",user._id)
         data.append("file",image)
         data.append("subcategory",match.params.id)
+        console.log("yeaaad")
         API.post("/content",data,config)
         .then((res)=>{
             alert(res.data.message)
             
         })
         .catch((err)=>{
-            //console.log(err)
+            console.log(err.response)
         })
         
     }
@@ -137,6 +138,14 @@ const Write = (props) => {
                                     </div>
                                 </div>)):null} 
                         </div>
+                        <div className="w-auto pt-10 pb-5">
+                    <button
+                        onClick={()=>onClick()}
+                        className="bg-white w-20 h-10 rounded text-xl"
+                        >
+                            Post
+                    </button>
+                </div>
                     </div>
                     {filtered.length > 0 && search!= ""?<div className="col-end-3 mt-5">
                         <div>
@@ -168,14 +177,6 @@ const Write = (props) => {
                             </div>
                         </div>))}
                     </div>:null}
-                </div>
-                <div className="w-auto pt-10 pb-5">
-                    <button
-                    onClick={()=>onClick()}
-                    className="bg-white w-20 h-10 rounded text-xl"
-                    >
-                        Post
-                    </button>
                 </div>
             </div>
         </Wrapper>
