@@ -6,7 +6,6 @@ import { API, path } from '../../config/API'
 
 const Profile = (props) => {
     const {auth:{user}} = props
-    console.log(user)
     return (
         <Wrapper>
             {user ? 
@@ -14,10 +13,13 @@ const Profile = (props) => {
 	            <div id="profile" className="w-full lg:w-3/5 rounded-lg lg:rounded-l-lg lg:rounded-r-none shadow-2xl bg-white opacity-75 mx-6 lg:mx-0">
 		         <div className="p-4 md:p-12 text-center lg:text-left">
 		
-                    <div className="block lg:hidden rounded-full shadow-xl mx-auto -mt-8 h-48 w-48 bg-cover bg-center"></div>
+                    <div className="block lg:hidden rounded-full shadow-xl mx-auto -mt-20 h-48 w-48 bg-cover bg-center">
+                        <img src={path+user.picture}
+                        className="h-100 rounded-full"/>
+                    </div>
                         
                     
-                    <h1 className="text-3xl font-bold pt-8 lg:pt-0">{user.fullname}</h1>
+                    <h1 className="text-3xl font-bold pt-20 lg:pt-0">{user.fullname}</h1>
                     <div className="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-green-500 opacity-25"></div>
                     <p className="pt-4 text-base font-bold flex items-center justify-center lg:justify-start">
                         <svg className="h-4 fill-current text-green-700 pr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
