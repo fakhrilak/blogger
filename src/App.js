@@ -50,7 +50,7 @@ const App = () => {
             setMusic_fav(res.data.data.Music)
         })
         .catch((err)=>{
-            alert(err.message)
+            alert(err.response.message)
         })
     }
   },[id])

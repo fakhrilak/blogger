@@ -16,7 +16,6 @@ const MusicControlle = ({auth}) => {
     const [volume,setVolume] = useState(0.2)
     useEffect(()=>{
         if(auth.user){
-            console.log("siniiii")
             Socket.emit("joinMusic",{
                 "email" : auth.user.email,
                 "mode" : "controller",
@@ -27,7 +26,7 @@ const MusicControlle = ({auth}) => {
                 setPlayList(res.data.data)
             })
             .catch((err)=>{
-                alert(err.message)
+                alert(err.response.message)
             })
         }
     },[auth])
@@ -40,7 +39,7 @@ const MusicControlle = ({auth}) => {
                 setMusic(res.data.data.Music)
             })
             .catch((err)=>{
-                alert(err.message)
+                alert(err.response.message)
             })
         }
     },[idPlaylist])

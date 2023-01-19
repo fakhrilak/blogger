@@ -40,13 +40,14 @@ const Write = (props) => {
         data.append("idUser",user._id)
         data.append("file",image)
         data.append("subcategory",match.params.id)
+        console.log("yeaaad")
         API.post("/content",data,config)
         .then((res)=>{
             alert(res.data.message)
             
         })
         .catch((err)=>{
-            alert(err.response.message)
+            console.log(err.response)
         })
         
     }
@@ -57,7 +58,7 @@ const Write = (props) => {
             setUsers(res.data.data)
         })
         .catch((err)=>{
-            alert(err.response.message)
+            console.log(err.message)
         })
     }, [])
 
@@ -76,7 +77,7 @@ const Write = (props) => {
 
     const tambah=(data)=>{
         setParticipan([...participan,data])
-        // alert(err.response.message)
+        console.log(participan)
     }
     return user?(
         <Wrapper>

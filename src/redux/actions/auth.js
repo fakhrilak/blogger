@@ -42,7 +42,8 @@ export const loadUser = () => async (dispatch) => {
       payload: res.data
     });
   } catch (err) {
-    alert(err.response.message)
+    // console.log("disini")
+    // alert(err.response.message)
   }
 };
 
