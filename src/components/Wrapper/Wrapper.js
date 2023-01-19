@@ -117,12 +117,13 @@ const Wrapper = (props) => {
                 </SidebarHeader>
                 <SidebarContent >
                     <Menu iconShape="square">
-                        {user? Data.map((data)=>(
+                        {user? Data.map((data,index)=>(
                             <>
                             {data.role == user.role ?
-                                <SubMenu title={user.fullname}>
-                                {data.data.map((data)=>(
+                                <SubMenu title={user.fullname} key={index}>
+                                {data.data.map((data,index)=>(
                                     <MenuItem
+                                    key={index}
                                     onClick={()=>history.push(data.route)}
                                     >{data.name}</MenuItem>
                                 ))}
