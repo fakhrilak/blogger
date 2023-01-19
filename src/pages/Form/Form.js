@@ -18,13 +18,13 @@ const Form = () => {
     const[yt,setYT] = useState([])
     useEffect(()=>{
         Socket.on("error"+Socket.id,data=>{
-            console.log(data.message)
+            //console.log(data.message)
             alert(data.message)
         })
     },[])
     useEffect(()=>{
         Socket.on("progress"+Socket.id,data=>{
-            console.log(data)
+            //console.log(data)
             setLoading(false)
             setProgress(data)
         })
@@ -96,7 +96,7 @@ const Form = () => {
         API.get("/yt-link?title="+cari,config)
         .then((res)=>{
             setYT(res.data.data)
-            console.log(res.data.data)
+            //console.log(res.data.data)
         })
         .catch((err)=>{
             alert("fail get data from yt")

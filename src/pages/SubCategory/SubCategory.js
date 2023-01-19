@@ -2,22 +2,22 @@ import React, { useState } from 'react'
 import Wrapper from '../../components/Wrapper/Wrapper'
 import {useHistory, useParams} from "react-router-dom"
 import { API, config } from '../../config/API'
-import Videos from '../../components/card/cardvideos'
+import Videos from '../../components/card/Cardvideos'
 import ReactQuill from 'react-quill'
 import { path } from '../../config/API'
 import dayjs from 'dayjs'
 import logo from "../../img/logo.png"
 const SubCategory = ({match}) => {
-    console.log(match.params,"ini paramas")
+    //console.log(match.params,"ini paramas")
     const [contets,setContets] =useState([])
     React.useEffect(() => {
         API.get("/sub-category/"+match.params.id,config)
         .then((res)=>{
             setContets(res.data.data.contents)
-            console.log(res.data.data.contents," =============== data")
+            //console.log(res.data.data.contents," =============== data")
         })
         .catch((err)=>{
-            console.log(err)
+            //console.log(err)
         })
 
     }, [match.params.id])
@@ -35,7 +35,7 @@ const SubCategory = ({match}) => {
                     </div>
                     {contets.length > 0 ?
                     <div className="w-11/12 m-auto">
-                        <div className="lg:grid lg:grid-cols-3 lg:grid-cols-2 mt-5 gap-14 ">
+                        <div className="lg:grid grid-cols-3 lg:grid-cols-2 mt-5 gap-14 ">
                         {contets.map((data)=>(
                             
                                 <div className="rounded-lg bg-gray-500 mt-4 shadow-2xl overflow-hidden" 

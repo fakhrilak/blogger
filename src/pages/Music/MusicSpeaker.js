@@ -61,7 +61,7 @@ const MusicSpeaker = ({auth,match}) => {
     },[music_fav])
     useEffect(()=>{
         Socket.on("onRes-reqPlayIndex"+Socket.id,data=>{
-            console.log(data,"playindex")
+            //console.log(data,"playindex")
             setPlayIndex(data.index)
         })
     },[])
@@ -80,7 +80,7 @@ const MusicSpeaker = ({auth,match}) => {
     },[triger])
     useEffect(()=>{
         Socket.on("onRes-reqChangePlaymode"+Socket.id,data=>{
-            console.log(data,"heeeee")
+            //console.log(data,"heeeee")
             setTriger(!triger)
             setModePlay(data.mode)
         })
@@ -149,7 +149,7 @@ const MusicSpeaker = ({auth,match}) => {
                     getAudioInstance={(audioInstance)=>{
                         setAudioIntance(audioInstance)
                         Socket.on("onRes-reqChangeVolume"+Socket.id,data=>{
-                            console.log(data)
+                            //console.log(data)
                             audioInstance.volume=data.volume
                         })
                         Socket.on("onRes-reqPlayStatus"+Socket.id,data=>{
@@ -161,7 +161,7 @@ const MusicSpeaker = ({auth,match}) => {
                         })
                     }}
                     onAudioVolumeChange={(volume)=>{
-                        console.log(volume,"ini volume")
+                        //console.log(volume,"ini volume")
                     }}
                     onAudioProgress={(audioInfo)=>{
                         // RenderAudio(audioInfo)
@@ -180,7 +180,7 @@ const MusicSpeaker = ({auth,match}) => {
                     showLyric={false}
                     onAudioPlay={(currentPlayId,audioLists,audioInfo)=>{
                     setCurrentplay(currentPlayId)
-                    console.log(currentPlayId,"audio info")
+                    //console.log(currentPlayId,"audio info")
                     }}
                     mobileMediaQuery='(max-width: 500px) and (orientation : portrait)'
                     // getAudioInstance={(instance) => {

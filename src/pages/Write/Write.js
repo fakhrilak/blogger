@@ -46,7 +46,7 @@ const Write = (props) => {
             
         })
         .catch((err)=>{
-            console.log(err)
+            //console.log(err)
         })
         
     }
@@ -57,7 +57,7 @@ const Write = (props) => {
             setUsers(res.data.data)
         })
         .catch((err)=>{
-            console.log(err.message)
+            //console.log(err.message)
         })
     }, [])
 
@@ -76,7 +76,7 @@ const Write = (props) => {
 
     const tambah=(data)=>{
         setParticipan([...participan,data])
-        console.log(participan)
+        //console.log(participan)
     }
     return user?(
         <Wrapper>

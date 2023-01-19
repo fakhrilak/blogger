@@ -80,7 +80,7 @@ const Home = (props) => {
                <div className="w-full h-full pb-20">
                    <div className="m-auto w-10/12">
                         <div className="pt-20">
-                            <p className="w-auto text-center text-3xl font-bold animate-bounce">WELCOME TO ZILOG BLOGGER HAHAHA</p>
+                            <p className="w-auto text-center text-3xl font-bold animate-bounce">WELCOME TO ZILOG BLOGGER</p>
                         </div>
                         <div className="lg:flex xl:flex 2xl:flex m-auto">
                             <div className="m-auto">
@@ -127,7 +127,7 @@ const Home = (props) => {
                                 style={style}
                                 url ={encodeURI(hostshare+playTime.name)}
                                 socialTypes={['facebook','twitter','reddit','linkedin','line','hatena',"instapaper",'email']} 
-                                //  onSocialButtonClicked={ data=> console.log(data)}    
+                                //  onSocialButtonClicked={ data=> //console.log(data)}    
                             />
                         </div>
                    </div>

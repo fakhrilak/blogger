@@ -11,7 +11,7 @@ const MusicChoose = ({auth}) => {
         if(auth.user){
             Socket.emit("getMyPlayerMusic",auth.user)
             Socket.on("onRes-getMyPlayerMusic",data=>{
-                console.log(data,"iniiii")
+                //console.log(data,"iniiii")
                 setAvailableMode(data)
             })
         }

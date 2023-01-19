@@ -16,7 +16,7 @@ const MusicControlle = ({auth}) => {
     const [volume,setVolume] = useState(0.2)
     useEffect(()=>{
         if(auth.user){
-            console.log("siniiii")
+            //console.log("siniiii")
             Socket.emit("joinMusic",{
                 "email" : auth.user.email,
                 "mode" : "controller",

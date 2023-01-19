@@ -30,11 +30,11 @@ const Read = ({match,auth}) => {
         }
     }, [content]);
     useEffect(()=>{
-        console.log(match.params.id,"ini params")
+        //console.log(match.params.id,"ini params")
         API.get(`/content/${match.params.id}`)
         .then((res)=>{
             setContent(res.data.data)
-            console.log(res.data.data)
+            //console.log(res.data.data)
             setEditor("")
         })
         .catch((err)=>{
@@ -76,7 +76,7 @@ const Read = ({match,auth}) => {
             alert(err.message)
         })
     }
-    console.log(content.User)
+    //console.log(content.User)
     return (
         <Wrapper>
             {content.User ?

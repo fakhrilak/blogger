@@ -28,7 +28,7 @@ const Login = ({loadUser,auth:{user}}) => {
             }           
         })
         .catch((err)=>{
-            console.log(err.response)
+            //console.log(err.response)
             dispatch({
                 type:types.login_fail,
                 payload:err.response

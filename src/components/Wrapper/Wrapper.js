@@ -22,7 +22,7 @@ const Wrapper = (props) => {
             setData(res.data.data)
         })
         .catch((err)=>{
-            console.log(err.response)
+            // //console.log(err.response)
         })
     },[])
     const history = useHistory()
@@ -76,8 +76,9 @@ const Wrapper = (props) => {
                         (<SubMenu title={data.nameCategory}
                         key={data._id}
                         >
-                            {data.subcategory.length > 0 ? data.subcategory.map((data)=>(
+                            {data.subcategory.length > 0 ? data.subcategory.map((data,index)=>(
                             <MenuItem
+                            key={index}
                             onClick={()=>history.push(`/sub-category/${data._id}`)}
                             >{data.nameSubCategory}</MenuItem>))
                             :null}
