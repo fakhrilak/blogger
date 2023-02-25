@@ -38,3 +38,40 @@ export const Data = [
         ]
     }
 ]
+
+export const dataAPP = [
+    {
+        "name" : "APP1",
+        "enpoint" : [
+            {
+                "name" : "get"
+            },
+            {
+                "name" : "post"
+            },
+            {
+                "name" : "delete"
+            },
+            {
+                "name" : "put" 
+            }
+        ]
+    },
+    {
+        "name" : "APP2",
+        "enpoint" : [
+            {
+                "name" : "get"
+            },
+            {
+                "name" : "post"
+            },
+            {
+                "name" : "delete"
+            },
+            {
+                "name" : "put" 
+            }
+        ]
+    }
+]
