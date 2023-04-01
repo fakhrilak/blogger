@@ -1,6 +1,6 @@
 import SocketIOClient from "socket.io-client"
 import axios from 'axios';
-// let url = "http://be-blogger-v1.localhost/"
+// let url = "http://192.168.100.171:5000/"
 let url = "https://be-server.zilog.online"
 const socketURL = "https://be-server.zilog.online"
 export const musicUrl = "https://be-server.zilog.online/blogger/api/v2.1/music/"
