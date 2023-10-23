@@ -1,11 +1,11 @@
 import SocketIOClient from "socket.io-client"
 import axios from 'axios';
 // let url = "http://192.168.100.171:5000/"
-let url = "https://be-server.zilog.online"
-const socketURL = "https://be-server.zilog.online"
-export const musicUrl = "https://be-server.zilog.online/blogger/api/v2.1/music/"
-export const video_url = "https://be-server.zilog.online/blogger/api/v2.1/watch/video"
-export const hostshare= "https://blogger.zilog.online/share/"
+let url = "https://be-server.zilog.tech"
+const socketURL = "https://be-server.zilog.tech"
+export const musicUrl = "https://be-server.zilog.tech/blogger/api/v2.1/music/"
+export const video_url = "https://be-server.zilog.tech/blogger/api/v2.1/watch/video"
+export const hostshare= "https://blogger.zilog.tech/share/"
 export const API = axios.create({baseURL: url+`/blogger/api/v2.1/`});
 export const Socket = SocketIOClient(socketURL)
 // Alter defaults after instance has been created
